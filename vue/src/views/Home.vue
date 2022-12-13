@@ -5,26 +5,26 @@
         <!-- <input type="text" class="rounded border-2 border-gray-200 w-full" placeholder="Search for Meals" /> -->
 
 
-        <div class="flex gap-2 mt-2 justify-center">
-              <router-link :to ="{name:'byLetter',params:{letter}}" v-for="letter of letters" :key="letter">
-                {{ letter }}
-            </router-link>
-        </div>
-
-        <pre>{{ ingredients }} </pre>
+    
+        <!-- <pre>{{ ingredients.meals }} </pre> -->
+        
+        <MealItem v-for="meal of ingredients.meals" :key="meal.idMeal" :meal = "meal"></MealItem>
+       
     </div>
 </div>
 </template>
 
 <script setup>
+import MealItem from '../components/MealItem.vue'
 import { computed,onMounted,ref } from 'vue';
 import store from '../store';
 import axiosClient from '../axiosClient.js';
 
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split("");
+
+
+
+const meals = computed(()=>store.state.searchedMeals);
 const ingredients = ref([]);
-
-
 onMounted(async() => {
   const response =   await axiosClient.get('list.php?i=list');
   console.log(response.data);

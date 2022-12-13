@@ -4,6 +4,8 @@ export default {
     //     data :[]
     // }
 
-    searchedMeals:[]
+    searchedMeals:[],
+    mealsByLetter:[],
+    mealsByIngredient:[]
     
 }
